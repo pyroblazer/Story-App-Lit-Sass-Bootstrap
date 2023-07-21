@@ -1,5 +1,5 @@
-import { html, nothing } from 'lit';
-import LitWithoutShadowDom from '../base/LitWithoutShadowDom';
+import { html, nothing } from "lit";
+import LitWithoutShadowDom from "../base/LitWithoutShadowDom";
 
 class InputImageWithPreview extends LitWithoutShadowDom {
   static properties = {
@@ -16,14 +16,17 @@ class InputImageWithPreview extends LitWithoutShadowDom {
   constructor() {
     super();
 
-    this.type = 'text';
-    this.defaultImage = '';
-    this.defaultImageAlt = '';
+    this.type = "text";
+    this.defaultImage = "";
+    this.defaultImageAlt = "";
   }
 
   render() {
     return html`
-      <div style="width: 100%; height: 20rem" class="mb-3 ${!this.defaultImage ? 'd-none' : ''}">
+      <div
+        style="width: 100%; height: 20rem"
+        class="mb-3 ${!this.defaultImage ? "d-none" : ""}"
+      >
         ${this._imagePreviewTemplate()}
       </div>
       <input
@@ -40,12 +43,18 @@ class InputImageWithPreview extends LitWithoutShadowDom {
   }
 
   _updatePhotoPreview() {
-    const evidenceImgChange = document.querySelector('#validationCustomEvidenceImgChange');
-    const evidenceImgInput = document.querySelector('#validationCustomEvidence');
+    const evidenceImgChange = document.querySelector(
+      "#validationCustomEvidenceImgChange",
+    );
+    const evidenceImgInput = document.querySelector(
+      "#validationCustomPhoto",
+    );
 
     let evidenceRecordImg = null;
     if (this.defaultImage) {
-      evidenceRecordImg = document.querySelector('#validationCustomEvidenceImg');
+      evidenceRecordImg = document.querySelector(
+        "#validationCustomEvidenceImg",
+      );
     }
 
     const photo = evidenceImgInput.files[0];
@@ -54,10 +63,10 @@ class InputImageWithPreview extends LitWithoutShadowDom {
     const reader = new FileReader();
     reader.onload = (event) => {
       if (this.defaultImage) {
-        evidenceRecordImg.classList.add('d-none');
+        evidenceRecordImg.classList.add("d-none");
       }
-      evidenceImgChange.parentElement.classList.remove('d-none');
-      evidenceImgChange.classList.remove('d-none');
+      evidenceImgChange.parentElement.classList.remove("d-none");
+      evidenceImgChange.classList.remove("d-none");
       evidenceImgChange.style.backgroundImage = `url('${event.target.result}')`;
     };
 
@@ -65,8 +74,8 @@ class InputImageWithPreview extends LitWithoutShadowDom {
   }
 
   _feedbackTemplate() {
-    let validFeedbackTemplate = '';
-    let invalidFeedbackTemplate = '';
+    let validFeedbackTemplate = "";
+    let invalidFeedbackTemplate = "";
     if (this.validFeedbackMessage) {
       validFeedbackTemplate = html`
         <div class="valid-feedback">${this.validFeedbackMessage}</div>
@@ -84,7 +93,7 @@ class InputImageWithPreview extends LitWithoutShadowDom {
   _imagePreviewTemplate() {
     const imgChangeTemplate = html`
       <div
-        class="w-100 h-100 ${this.defaultImage ? 'd-none' : ''}"
+        class="w-100 h-100 ${this.defaultImage ? "d-none" : ""}"
         style="
           background-repeat: no-repeat;
           background-position: center;
@@ -109,4 +118,4 @@ class InputImageWithPreview extends LitWithoutShadowDom {
   }
 }
 
-customElements.define('input-image-with-preview', InputImageWithPreview);
+customElements.define("input-image-with-preview", InputImageWithPreview);

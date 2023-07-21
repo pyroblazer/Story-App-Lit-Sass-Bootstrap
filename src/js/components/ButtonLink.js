@@ -1,5 +1,5 @@
-import { html } from 'lit';
-import LitWithoutShadowDom from './base/LitWithoutShadowDom';
+import { html } from "lit";
+import LitWithoutShadowDom from "./base/LitWithoutShadowDom";
 
 class ButtonLink extends LitWithoutShadowDom {
   static properties = {
@@ -13,16 +13,14 @@ class ButtonLink extends LitWithoutShadowDom {
     super();
     this._checkAvailabilityProperty();
 
-    this.classes = '';
+    this.classes = "";
   }
 
   _checkAvailabilityProperty() {
-    if (!this.hasAttribute('to')) {
-      throw new Error(`Atribut "to" harus diterapkan pada elemen ${this.localName}`);
-    }
-
-    if (!this.hasAttribute('content')) {
-      throw new Error(`Atribut "content" harus diterapkan pada elemen ${this.localName}`);
+    if (!this.hasAttribute("to")) {
+      throw new Error(
+        `Atribut "to" harus diterapkan pada elemen ${this.localName}`,
+      );
     }
   }
 
@@ -43,4 +41,4 @@ class ButtonLink extends LitWithoutShadowDom {
   }
 }
 
-customElements.define('button-link', ButtonLink);
+customElements.define("button-link", ButtonLink);

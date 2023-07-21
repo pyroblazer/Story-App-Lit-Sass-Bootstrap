@@ -1,18 +1,21 @@
-import './CardDashboard';
-import './ButtonLink';
-import './ModalTransaction';
+import "./ButtonLink";
 
-import './NavApp';
-import './NavLinks';
-import './NavLink';
-import './NavLinkAuth';
+import "./NavApp";
+import "./NavLinks";
+import "./NavLink";
 
-import './FooterApp';
+import "./about/Hero";
 
-import './form/InputWithValidation';
-import './form/TextareaWithValidation';
-import './form/InputGroupWithValidation';
-import './form/InputImageWithPreview';
-import './form/InputRadioWithValidation';
-import './form/LocalePicker';
-import './form/RadioItem';
+import "./home/Top";
+
+import "./add/Main";
+
+import "./CardStory"
+
+import "./FooterApp";
+
+import "./form/InputWithValidation";
+import "./form/TextareaWithValidation";
+import "./form/InputGroupWithValidation";
+import "./form/InputImageWithPreview";
+import "./form/LocalePicker";

@@ -1,6 +1,6 @@
-import { html } from 'lit';
-import LitWithoutShadowDom from './base/LitWithoutShadowDom';
-import { msg, updateWhenLocaleChanges } from '@lit/localize';
+import { html } from "lit";
+import LitWithoutShadowDom from "./base/LitWithoutShadowDom";
+import { msg, updateWhenLocaleChanges } from "@lit/localize";
 
 class NavLinks extends LitWithoutShadowDom {
   constructor() {
@@ -10,9 +10,16 @@ class NavLinks extends LitWithoutShadowDom {
 
   render() {
     return html`
-      <ul class="navbar-nav d-flex align-items-center gap-3">
-        <nav-link content="${msg(`Dasbor`)}" to="/"></nav-link>
-        <nav-link content="${msg(`Tambah Data`)}" to="/transactions/add.html"></nav-link>
+      <ul class="navbar-nav navbar-nav justify-content-end flex-grow-1 pe-3">
+        <nav-link content="${msg(`Beranda`)}" to="/"></nav-link>
+        <nav-link
+          content="${msg(`Tambah Story`)}"
+          to="/stories/add.html"
+        ></nav-link>
+        <nav-link
+          content="${msg(`Tentang Kami`)}"
+          to="/about.html"
+        ></nav-link>
         <nav-link-auth class="d-none" id="userLoggedMenu"></nav-link-auth>
         <nav-link content="${msg(`Masuk`)}" to="#" id="loginMenu"></nav-link>
       </ul>
@@ -20,4 +27,4 @@ class NavLinks extends LitWithoutShadowDom {
   }
 }
 
-customElements.define('nav-links', NavLinks);
+customElements.define("nav-links", NavLinks);

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title><%= htmlWebpackPlugin.options.title %> | Stories</title>
+  </head>
+  <body>
+    <header>
+      <nav-app brandName="<%= brandName %>"></nav-app>
+    </header>
+
+    <main>
+      <div class="main-content">
+        <div class="container py-5">
+          <!-- Story Cards -->
+          <div>
+              <!-- <h1>Stories Untukmu</h1> -->
+              <home-top/></home-top>
+              
+
+            <div class="row mt-3">
+              <div class="col">
+                <div class="container" id="recordsGridContainer">
+                  <div class="row" id="recordsGridRow"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="main-footer bg-dark">
+        <div class="container px-3 py-4">
+          <footer-app></footer-app>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

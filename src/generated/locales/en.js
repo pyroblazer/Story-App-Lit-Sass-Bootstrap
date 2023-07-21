@@ -9,16 +9,14 @@
     /* eslint-disable @typescript-eslint/no-explicit-any */
 
     export const templates = {
-      's229fb4df9ecf3ed1': `Logout`,
-'s408b01f4fe1ee891': `Amount`,
+      's07bef2850db005d7': `Photo`,
 's45dab30b4d2d3c14': `Login`,
-'s48d08afb2fffe7fd': `Type`,
-'s50fa71c148532fe5': `Description`,
-'s749c72374d54863f': `Close`,
-'s8d9d6501de2bbd98': `Add Record`,
-'sc72cca9281ef6073': `Date`,
-'sef49b2c68fd1e332': `Name`,
-'sf70ed558ed523ac4': `Built with ❤ by Dicoding Indonesia`,
-'sf9a862bfd829397e': `Dashboard`,
+'s55f6b638087f3e45': `Stories for you`,
+'s772ce5f935d58e37': `Description`,
+'sb0960e5a7cadd988': `STORIES by Ignatius Timothy Manullang`,
+'sbc48bdf8ea977bca': `About Us`,
+'sce43d420b27c5f7a': `Home`,
+'sed1638d3a06dc77b': `Submit`,
+'sfae357d460dcc835': `Add Story`,
     };
   

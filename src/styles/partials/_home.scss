@@ -1,0 +1,32 @@
+$lines: 3;
+$line-height: 1.5em;
+
+@mixin text-truncate {
+  position: relative;
+  max-height: calc(#{$line-height} * #{$lines});
+  overflow: hidden;
+
+  + .expand-btn {
+    display: block;
+  }
+
+  + .close-btn {
+    display: none;
+  }
+
+  &.expanded {
+    max-height: none;
+
+    ~ .expand-btn {
+      display: none;
+    }
+
+    + .close-btn {
+      display: block;
+    }
+  }
+}
+
+.custom-text-truncate {
+  @include text-truncate;
+}

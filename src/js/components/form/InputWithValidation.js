@@ -1,5 +1,5 @@
-import { html, nothing } from 'lit';
-import LitWithoutShadowDom from '../base/LitWithoutShadowDom';
+import { html, nothing } from "lit";
+import LitWithoutShadowDom from "../base/LitWithoutShadowDom";
 
 class InputWithValidation extends LitWithoutShadowDom {
   static properties = {
@@ -17,14 +17,14 @@ class InputWithValidation extends LitWithoutShadowDom {
     super();
     this._checkAvailabilityProperty();
 
-    this.type = 'text';
+    this.type = "text";
     this.required = false;
   }
 
   _checkAvailabilityProperty() {
-    if (!this.hasAttribute('invalidFeedbackMessage')) {
+    if (!this.hasAttribute("invalidFeedbackMessage")) {
       throw new Error(
-          `Atribut "invalidFeedbackMessage" harus diterapkan pada elemen ${this.localName}`,
+        `Atribut "invalidFeedbackMessage" harus diterapkan pada elemen ${this.localName}`,
       );
     }
   }
@@ -47,11 +47,13 @@ class InputWithValidation extends LitWithoutShadowDom {
 
   _validFeedbackTemplate() {
     if (this.validFeedbackMessage) {
-      return html` <div class="valid-feedback">${this.validFeedbackMessage}</div> `;
+      return html`
+        <div class="valid-feedback">${this.validFeedbackMessage}</div>
+      `;
     }
 
     return html``;
   }
 }
 
-customElements.define('input-with-validation', InputWithValidation);
+customElements.define("input-with-validation", InputWithValidation);

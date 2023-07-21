@@ -1,8 +1,12 @@
-import { html } from 'lit';
-import { allLocales } from '../../../generated/locale-codes';
-import { updateWhenLocaleChanges } from '@lit/localize';
-import { getLocale, localeNames, setLocaleFromUrl } from '../../localization.js';
-import LitWithoutShadowDom from '../base/LitWithoutShadowDom';
+import { html } from "lit";
+import { allLocales } from "../../../generated/locale-codes";
+import { updateWhenLocaleChanges } from "@lit/localize";
+import {
+  getLocale,
+  localeNames,
+  setLocaleFromUrl,
+} from "../../localization.js";
+import LitWithoutShadowDom from "../base/LitWithoutShadowDom";
 
 class LocalePicker extends LitWithoutShadowDom {
   constructor() {
@@ -29,12 +33,12 @@ class LocalePicker extends LitWithoutShadowDom {
 
     if (newLocale !== getLocale()) {
       const url = new URL(window.location.href);
-      url.searchParams.set('lang', newLocale);
+      url.searchParams.set("lang", newLocale);
 
-      window.history.pushState(null, '', url.toString());
+      window.history.pushState(null, "", url.toString());
       setLocaleFromUrl();
     }
   }
 }
 
-customElements.define('locale-picker', LocalePicker);
+customElements.define("locale-picker", LocalePicker);

@@ -1,5 +1,5 @@
-import { html, nothing } from 'lit';
-import LitWithoutShadowDom from '../base/LitWithoutShadowDom';
+import { html, nothing } from "lit";
+import LitWithoutShadowDom from "../base/LitWithoutShadowDom";
 
 class InputGroupWithValidation extends LitWithoutShadowDom {
   static properties = {
@@ -22,19 +22,26 @@ class InputGroupWithValidation extends LitWithoutShadowDom {
   }
 
   _checkAvailabilityProperty() {
-    if (!this.hasAttribute('type')) {
-      throw new Error(`Atribut "type" harus diterapkan pada elemen ${this.localName}`);
-    }
-
-    if (!(this.hasAttribute('inputGroupText') || this.hasAttribute('inputGroupIcon'))) {
+    if (!this.hasAttribute("type")) {
       throw new Error(
-          `Salah satu dari atribut harus diterapkan pada elemen ${this.localName}: inputGroupText dan inputGroupIcon`,
+        `Atribut "type" harus diterapkan pada elemen ${this.localName}`,
       );
     }
 
-    if (!this.hasAttribute('invalidFeedbackMessage')) {
+    if (
+      !(
+        this.hasAttribute("inputGroupText") ||
+        this.hasAttribute("inputGroupIcon")
+      )
+    ) {
       throw new Error(
-          `Atribut "invalidFeedbackMessage" harus diterapkan pada elemen ${this.localName}`,
+        `Salah satu dari atribut harus diterapkan pada elemen ${this.localName}: inputGroupText dan inputGroupIcon`,
+      );
+    }
+
+    if (!this.hasAttribute("invalidFeedbackMessage")) {
+      throw new Error(
+        `Atribut "invalidFeedbackMessage" harus diterapkan pada elemen ${this.localName}`,
       );
     }
   }
@@ -42,7 +49,9 @@ class InputGroupWithValidation extends LitWithoutShadowDom {
   render() {
     return html`
       <div class="input-group has-validation">
-        <span class="input-group-text d-flex gap-2">${this.inputGroupTextTemplate()}</span>
+        <span class="input-group-text d-flex gap-2"
+          >${this.inputGroupTextTemplate()}</span
+        >
         <input
           class="form-control"
           id=${this.inputId || nothing}
@@ -58,12 +67,12 @@ class InputGroupWithValidation extends LitWithoutShadowDom {
   }
 
   inputGroupTextTemplate() {
-    let inputGroupIconTemplate = '';
+    let inputGroupIconTemplate = "";
     if (this.inputGroupIcon) {
       inputGroupIconTemplate = html`<i class="bi ${this.inputGroupIcon}"></i>`;
     }
 
-    let inputGroupTextTemplate = '';
+    let inputGroupTextTemplate = "";
     if (this.inputGroupText) {
       inputGroupTextTemplate = html`${this.inputGroupText}`;
     }
@@ -74,7 +83,9 @@ class InputGroupWithValidation extends LitWithoutShadowDom {
   _validFeedbackTemplate() {
     if (this.validation) {
       if (this.validFeedbackMessage) {
-        return html` <div class="valid-feedback">${this.validFeedbackMessage}</div> `;
+        return html`
+          <div class="valid-feedback">${this.validFeedbackMessage}</div>
+        `;
       }
     }
 
@@ -82,4 +93,4 @@ class InputGroupWithValidation extends LitWithoutShadowDom {
   }
 }
 
-customElements.define('input-group-with-validation', InputGroupWithValidation);
+customElements.define("input-group-with-validation", InputGroupWithValidation);

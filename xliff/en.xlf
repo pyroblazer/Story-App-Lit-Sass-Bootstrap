@@ -2,49 +2,41 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file target-language="en" source-language="id" original="lit-localize-inputs" datatype="plaintext">
     <body>
-      <trans-unit id="s48d08afb2fffe7fd">
-        <source>Tipe</source>
-        <target>Type</target>
-      </trans-unit>
-      <trans-unit id="sef49b2c68fd1e332">
-        <source>Nama</source>
-        <target>Name</target>
-      </trans-unit>
-      <trans-unit id="sc72cca9281ef6073">
-        <source>Tanggal</source>
-        <target>Date</target>
-      </trans-unit>
-      <trans-unit id="s408b01f4fe1ee891">
-        <source>Jumlah Uang</source>
-        <target>Amount</target>
-      </trans-unit>
-      <trans-unit id="s50fa71c148532fe5">
-        <source>Catatan</source>
-        <target>Description</target>
-      </trans-unit>
-      <trans-unit id="s749c72374d54863f">
-        <source>Tutup</source>
-        <target>Close</target>
-      </trans-unit>
-      <trans-unit id="sf9a862bfd829397e">
-        <source>Dasbor</source>
-        <target>Dashboard</target>
-      </trans-unit>
-      <trans-unit id="s8d9d6501de2bbd98">
-        <source>Tambah Data</source>
-        <target>Add Record</target>
-      </trans-unit>
       <trans-unit id="s45dab30b4d2d3c14">
         <source>Masuk</source>
         <target>Login</target>
       </trans-unit>
-      <trans-unit id="s229fb4df9ecf3ed1">
-        <source>Keluar</source>
-        <target>Logout</target>
+      <trans-unit id="sfae357d460dcc835">
+        <source>Tambah Story</source>
+        <target>Add Story</target>
       </trans-unit>
-      <trans-unit id="sf70ed558ed523ac4">
-        <source>Dibuat dengan ❤ oleh Dicoding Indonesia</source>
-        <target>Built with ❤ by Dicoding Indonesia</target>
+      <trans-unit id="sce43d420b27c5f7a">
+        <source>Beranda</source>
+        <target>Home</target>
+      </trans-unit>
+      <trans-unit id="sb0960e5a7cadd988">
+        <source>STORIES by Ignatius Timothy Manullang</source>
+        <target>STORIES by Ignatius Timothy Manullang</target>
+      </trans-unit>
+      <trans-unit id="sbc48bdf8ea977bca">
+        <source>Tentang Kami</source>
+        <target>About Us</target>
+      </trans-unit>
+      <trans-unit id="s55f6b638087f3e45">
+        <source>Stories Untukmu</source>
+        <target>Stories for you</target>
+      </trans-unit>
+      <trans-unit id="s772ce5f935d58e37">
+        <source>Deskripsi</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="s07bef2850db005d7">
+        <source>Foto</source>
+        <target>Photo</target>
+      </trans-unit>
+      <trans-unit id="sed1638d3a06dc77b">
+        <source>Simpan</source>
+        <target>Submit</target>
       </trans-unit>
     </body>
   </file>

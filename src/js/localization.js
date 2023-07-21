@@ -1,5 +1,5 @@
-import { configureLocalization } from '@lit/localize';
-import { sourceLocale, targetLocales } from '../generated/locale-codes';
+import { configureLocalization } from "@lit/localize";
+import { sourceLocale, targetLocales } from "../generated/locale-codes";
 
 export const { getLocale, setLocale } = configureLocalization({
   sourceLocale,
@@ -11,14 +11,14 @@ export const { getLocale, setLocale } = configureLocalization({
 
 export const setLocaleFromUrl = async () => {
   const url = new URL(window.location.href);
-  const locale = url.searchParams.get('lang') || sourceLocale;
+  const locale = url.searchParams.get("lang") || sourceLocale;
 
-  console.log('setLocaleFromUrl', locale);
-  console.log('getLocale', getLocale());
+  console.log("setLocaleFromUrl", locale);
+  console.log("getLocale", getLocale());
   await setLocale(locale);
 };
 
 export const localeNames = {
-  en: 'Inggris',
-  id: 'Indonesia',
+  en: "Inggris",
+  id: "Indonesia",
 };
