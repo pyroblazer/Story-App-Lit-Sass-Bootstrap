@@ -4,11 +4,10 @@ const ApiEndpoint = {
   REGISTER: `${Config.BASE_URL}/register`,
   LOGIN: `${Config.BASE_URL}/login`,
 
-  GET_ALL_TRANSACTION: `${Config.BASE_URL}/transactions`,
-  GET_BY_ID_TRANSACTION: (id) => `${Config.BASE_URL}/transactions/${id}`,
-  STORE_TRANSACTION: `${Config.BASE_URL}/transactions`,
-  UPDATE_TRANSACTION: (id) => `${Config.BASE_URL}/transactions/${id}`,
-  DESTROY_TRANSACTION: (id) => `${Config.BASE_URL}/transactions/${id}`,
+  GET_ALL_STORY: `${Config.BASE_URL}/stories`,
+  GET_BY_ID_STORY: (id) => `${Config.BASE_URL}/stories/${id}`,
+  STORE_STORY: `${Config.BASE_URL}/stories`,
+  UPDATE_STORY: (id) => `${Config.BASE_URL}/stories/${id}`,
 };
 
 export default ApiEndpoint;

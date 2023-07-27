@@ -7,11 +7,6 @@ const Home = {
   },
 
   async _initialData() {
-    // const fetchRecords = await fetch("/data/DATA.json");
-    // const responseRecords = await fetchRecords.json();
-
-    // this._userListStory = responseRecords.listStory;
-    // this._populateStoriesRecordToTable(this._userListStory);
     try {
       this._userStories = await Stories.getAll();
 

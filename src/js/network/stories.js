@@ -12,25 +12,26 @@ import {
   uploadBytes,
   getDownloadURL,
 } from 'firebase/storage';
+import axios from 'axios';
 import { auth, db, storage } from '../utils/firebase';
+import ApiEndpoint from '../config/api-endpoint';
 
 const Stories = {
   async getAll() {
-    const storiesRef = collection(db, 'stories');
-    const storiesQuery = query(
-      storiesRef,
-    );
-    const querySnapshot = await getDocs(storiesQuery);
+    let responseRecords = {};
+    try {
+      // Make the GET request using Axios
+      const response = await axios.get(ApiEndpoint.GET_ALL_STORY);
 
-    const stories = [];
-    querySnapshot.forEach((item) => {
-      stories.push({
-        id: item.id,
-        ...item.data(),
-      });
-    });
+      console.log(response);
 
-    return stories;
+      // Access the data from the response
+      responseRecords = response.data;
+    } catch (error) {
+      // Handle any errors that occurred during the request
+      console.error('Error:', error);
+    }
+    return responseRecords;
   },
 
   async getById(id) {
