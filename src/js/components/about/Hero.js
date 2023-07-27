@@ -1,6 +1,6 @@
-import LitWithoutShadowDom from "../base/LitWithoutShadowDom";
-import { html } from "lit";
-import { msg, updateWhenLocaleChanges } from "@lit/localize";
+import { html } from 'lit';
+import { updateWhenLocaleChanges } from '@lit/localize';
+import LitWithoutShadowDom from '../base/LitWithoutShadowDom';
 
 class Hero extends LitWithoutShadowDom {
   constructor() {
@@ -23,4 +23,4 @@ class Hero extends LitWithoutShadowDom {
   }
 }
 
-customElements.define("about-hero", Hero);
+customElements.define('about-hero', Hero);

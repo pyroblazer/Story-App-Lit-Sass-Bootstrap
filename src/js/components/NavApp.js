@@ -1,5 +1,5 @@
-import { html } from "lit";
-import LitWithoutShadowDom from "./base/LitWithoutShadowDom";
+import { html } from 'lit';
+import LitWithoutShadowDom from './base/LitWithoutShadowDom';
 
 class NavApp extends LitWithoutShadowDom {
   static properties = {
@@ -14,7 +14,7 @@ class NavApp extends LitWithoutShadowDom {
   }
 
   _checkAvailabilityProperty() {
-    if (!this.hasAttribute("brandName")) {
+    if (!this.hasAttribute('brandName')) {
       throw new Error(
         `Atribut "brandName" harus diterapkan pada elemen ${this.localName}`,
       );
@@ -27,25 +27,25 @@ class NavApp extends LitWithoutShadowDom {
 
   render() {
     return html`
-      <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-          <a class="navbar-brand text-uppercase text-bold" href="/"
-            >${this.brandName}</a
-          >
-          <button
-            class="navbar-toggler"
-            type="button"
-            @click=${this.toggleNavbar}
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse ${this.isOpen ? "show" : ""}">
-            <nav-links />
+    <nav class="navbar navbar-dark bg-dark">
+          <div class="container">
+            <a class="navbar-brand text-uppercase text-bold" href="/"
+              >${this.brandName}</a
+            >
+            <button
+              class="navbar-toggler"
+              type="button"
+              @click=${this.toggleNavbar}
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse ${this.isOpen ? 'show' : ''}">
+              <nav-links />
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
     `;
   }
 }
 
-customElements.define("nav-app", NavApp);
+customElements.define('nav-app', NavApp);

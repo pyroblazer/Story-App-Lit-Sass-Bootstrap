@@ -1,5 +1,5 @@
-import { html, nothing } from "lit";
-import LitWithoutShadowDom from "../base/LitWithoutShadowDom";
+import { html, nothing } from 'lit';
+import LitWithoutShadowDom from '../base/LitWithoutShadowDom';
 
 class InputGroupWithValidation extends LitWithoutShadowDom {
   static properties = {
@@ -22,7 +22,7 @@ class InputGroupWithValidation extends LitWithoutShadowDom {
   }
 
   _checkAvailabilityProperty() {
-    if (!this.hasAttribute("type")) {
+    if (!this.hasAttribute('type')) {
       throw new Error(
         `Atribut "type" harus diterapkan pada elemen ${this.localName}`,
       );
@@ -30,8 +30,8 @@ class InputGroupWithValidation extends LitWithoutShadowDom {
 
     if (
       !(
-        this.hasAttribute("inputGroupText") ||
-        this.hasAttribute("inputGroupIcon")
+        this.hasAttribute('inputGroupText')
+        || this.hasAttribute('inputGroupIcon')
       )
     ) {
       throw new Error(
@@ -39,7 +39,7 @@ class InputGroupWithValidation extends LitWithoutShadowDom {
       );
     }
 
-    if (!this.hasAttribute("invalidFeedbackMessage")) {
+    if (!this.hasAttribute('invalidFeedbackMessage')) {
       throw new Error(
         `Atribut "invalidFeedbackMessage" harus diterapkan pada elemen ${this.localName}`,
       );
@@ -67,12 +67,12 @@ class InputGroupWithValidation extends LitWithoutShadowDom {
   }
 
   inputGroupTextTemplate() {
-    let inputGroupIconTemplate = "";
+    let inputGroupIconTemplate = '';
     if (this.inputGroupIcon) {
       inputGroupIconTemplate = html`<i class="bi ${this.inputGroupIcon}"></i>`;
     }
 
-    let inputGroupTextTemplate = "";
+    let inputGroupTextTemplate = '';
     if (this.inputGroupText) {
       inputGroupTextTemplate = html`${this.inputGroupText}`;
     }
@@ -93,4 +93,4 @@ class InputGroupWithValidation extends LitWithoutShadowDom {
   }
 }
 
-customElements.define("input-group-with-validation", InputGroupWithValidation);
+customElements.define('input-group-with-validation', InputGroupWithValidation);

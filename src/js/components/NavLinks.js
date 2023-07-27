@@ -1,6 +1,8 @@
-import { html } from "lit";
-import LitWithoutShadowDom from "./base/LitWithoutShadowDom";
-import { msg, updateWhenLocaleChanges } from "@lit/localize";
+import { html } from 'lit';
+import { msg, updateWhenLocaleChanges } from '@lit/localize';
+import LitWithoutShadowDom from './base/LitWithoutShadowDom';
+import CheckUserAuth from '../pages/auth/check-user-auth';
+import Auth from '../network/auth';
 
 class NavLinks extends LitWithoutShadowDom {
   constructor() {
@@ -8,23 +10,41 @@ class NavLinks extends LitWithoutShadowDom {
     updateWhenLocaleChanges(this);
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  _userLogOut(event) {
+    event.preventDefault();
+
+    try {
+      const response = Auth.logout();
+
+      console.log(response);
+      CheckUserAuth.checkLoginState();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   render() {
     return html`
-      <ul class="navbar-nav navbar-nav justify-content-end flex-grow-1 pe-3">
-        <nav-link content="${msg(`Beranda`)}" to="/"></nav-link>
-        <nav-link
-          content="${msg(`Tambah Story`)}"
-          to="/stories/add.html"
-        ></nav-link>
-        <nav-link
-          content="${msg(`Tentang Kami`)}"
-          to="/about.html"
-        ></nav-link>
-        <nav-link-auth class="d-none" id="userLoggedMenu"></nav-link-auth>
-        <nav-link content="${msg(`Masuk`)}" to="#" id="loginMenu"></nav-link>
+      <ul class="navbar-nav d-flex w-100 align-items-center gap-3">
+        <div>
+          <img
+            id="imgUserLogged"
+            style="width: 30px;height: 30px"
+            class="img-fluid rounded-pill"
+            src="https://ui-avatars.com/api/?name=User%20Name&background=random"
+            alt="User Name"
+          />
+          <span id="nameUserLogged"></span>
+        </div>
+        <nav-link content="${msg('Beranda')}" to="/"></nav-link>
+        <nav-link content="${msg('Tambah Story')}" to="/stories/add.html"></nav-link>
+        <nav-link content="${msg('Tentang Kami')}" to="/about.html"></nav-link>
+        <a class="nav-link link-like" id="userLogOut" @click=${this._userLogOut}>${msg('Keluar')}</a>
+        <nav-link content="${msg('Masuk')}" to="#" id="loginMenu"></nav-link>
       </ul>
     `;
   }
 }
 
-customElements.define("nav-links", NavLinks);
+customElements.define('nav-links', NavLinks);

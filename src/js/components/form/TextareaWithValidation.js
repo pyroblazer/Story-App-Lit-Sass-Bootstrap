@@ -1,5 +1,5 @@
-import { html, nothing } from "lit";
-import LitWithoutShadowDom from "../base/LitWithoutShadowDom";
+import { html, nothing } from 'lit';
+import LitWithoutShadowDom from '../base/LitWithoutShadowDom';
 
 class TextareaWithValidation extends LitWithoutShadowDom {
   static properties = {
@@ -22,7 +22,7 @@ class TextareaWithValidation extends LitWithoutShadowDom {
   }
 
   _checkAvailabilityProperty() {
-    if (!this.hasAttribute("invalidFeedbackMessage")) {
+    if (!this.hasAttribute('invalidFeedbackMessage')) {
       throw new Error(
         `Atribut "invalidFeedbackMessage" harus diterapkan pada elemen ${this.localName}`,
       );
@@ -56,4 +56,4 @@ class TextareaWithValidation extends LitWithoutShadowDom {
   }
 }
 
-customElements.define("textarea-with-validation", TextareaWithValidation);
+customElements.define('textarea-with-validation', TextareaWithValidation);

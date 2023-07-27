@@ -1,0 +1,14 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "no-underscore-dangle": "off",
+    "no-undef": "off",
+    "no-console": "off",
+    "no-alert": "off",
+    "no-return-assign": "off"
+  },
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  }
+}

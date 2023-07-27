@@ -1,5 +1,5 @@
-import { html } from "lit";
-import LitWithoutShadowDom from "./base/LitWithoutShadowDom";
+import { html } from 'lit';
+import LitWithoutShadowDom from './base/LitWithoutShadowDom';
 
 class NavLink extends LitWithoutShadowDom {
   static properties = {
@@ -13,7 +13,7 @@ class NavLink extends LitWithoutShadowDom {
   }
 
   _checkAvailabilityProperty() {
-    if (!this.hasAttribute("to")) {
+    if (!this.hasAttribute('to')) {
       throw new Error(
         `Atribut "to" harus diterapkan pada elemen ${this.localName}`,
       );
@@ -29,4 +29,4 @@ class NavLink extends LitWithoutShadowDom {
   }
 }
 
-customElements.define("nav-link", NavLink);
+customElements.define('nav-link', NavLink);

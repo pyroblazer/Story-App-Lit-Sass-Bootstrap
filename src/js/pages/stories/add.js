@@ -1,63 +1,72 @@
+import Stories from '../../network/stories';
+
 const Add = {
   async init() {
     this._initialUI();
     this._initialListener();
   },
 
-  _initialUI() {
- 
-  },
+  _initialUI() {},
 
   _initialListener() {
-    const addFormRecord = document.querySelector("#addRecordForm");
+    const addFormRecord = document.querySelector('#addRecordForm');
     addFormRecord.addEventListener(
-      "submit",
+      'submit',
       (event) => {
         event.preventDefault();
         event.stopPropagation();
 
-        addFormRecord.classList.add("was-validated");
+        addFormRecord.classList.add('was-validated');
         this._sendPost();
       },
       false,
     );
   },
 
-  _sendPost() {
+  async _sendPost() {
     const formData = this._getFormData();
+    console.log('formDataInitSendPost');
+    console.log(formData);
 
-    if (this._validateFormData({ ...formData })) {
-      console.log("formData");
-      console.log(formData);
+    try {
+      const storageResponse = await Stories.storePhoto(formData.photoUrl);
+      const srcPhoto = await Stories.getPhotoURL(storageResponse.metadata.fullPath);
+
+      const response = await Stories.store({
+        ...formData,
+        photoUrl: srcPhoto,
+      });
+      console.log(response);
+      window.alert('New story added successfully');
 
       this._goToHomePage();
+    } catch (error) {
+      console.error(error);
     }
   },
 
   _getFormData() {
-    const nameInput = "Current User";
-    const dateInput = new Date().toISOString();
-    const photoInput = document.querySelector("#validationCustomPhoto");
-    const descriptionInput = document.querySelector("#validationCustomDescription");
+    const photoInput = document.querySelector('#validationCustomPhoto');
+    const descriptionInput = document.querySelector(
+      '#validationCustomDescription',
+    );
 
     return {
-      name: nameInput.value,
       description: descriptionInput.value,
       photoUrl: photoInput.files[0],
-      createdAt: dateInput.value,
     };
   },
 
   _validateFormData(formData) {
     const formDataFiltered = Object.values(formData).filter(
-      (item) => item === "",
+      (item) => item === '',
     );
 
     return formDataFiltered.length === 0;
   },
 
   _goToHomePage() {
-    window.location.href = "/";
+    window.location.href = '/';
   },
 };
 

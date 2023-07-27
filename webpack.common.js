@@ -1,26 +1,54 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const htmlWebpackPluginConfig = {
   meta: {
     viewport:
-      "width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0",
-    "theme-color": "#4285f4",
+      'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0',
+    'theme-color': '#4285f4',
   },
   templateParameters: {
-    brandName: "Stories",
+    brandName: 'Stories',
   },
 };
 
+const htmlPages = [
+  {
+    filename: 'index.html',
+    template: 'src/views/home.html',
+    title: 'Home',
+  },
+  {
+    filename: 'stories/add.html',
+    template: 'src/views/stories/add.html',
+    title: 'Add Story',
+  },
+  {
+    filename: 'about.html',
+    template: 'src/views/about.html',
+    title: 'About',
+  },
+  {
+    filename: 'auth/login.html',
+    template: 'src/views/auth/login.html',
+    title: 'Login',
+  },
+  {
+    filename: 'auth/register.html',
+    template: 'src/views/auth/register.html',
+    title: 'About',
+  },
+];
+
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, "src/js/index.js"),
+    app: path.resolve(__dirname, 'src/js/index.js'),
   },
   output: {
-    filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
   module: {
@@ -28,52 +56,33 @@ module.exports = {
       {
         test: /\.(s[ac]ss)$/i,
         use: [
+          'style-loader',
+          'css-loader',
           {
-            loader: "style-loader",
-          },
-          {
-            loader: "css-loader",
-          },
-          {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                plugins: () => [require("autoprefixer")],
+                plugins: () => [require('autoprefixer')],
               },
             },
           },
-          {
-            loader: "sass-loader",
-          },
+          'sass-loader',
         ],
       },
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: "Home",
-      filename: "index.html",
-      template: path.resolve(__dirname, "src/views/home.html"),
+    ...htmlPages.map((page) => new HtmlWebpackPlugin({
+      filename: page.filename,
+      template: path.resolve(__dirname, page.template),
+      title: page.title,
       ...htmlWebpackPluginConfig,
-    }),
-    new HtmlWebpackPlugin({
-      title: "Add Story",
-      filename: "stories/add.html",
-      template: path.resolve(__dirname, "src/views/stories/add.html"),
-      ...htmlWebpackPluginConfig,
-    }),
-    new HtmlWebpackPlugin({
-      title: "About",
-      filename: "about.html",
-      template: path.resolve(__dirname, "src/views/about.html"),
-      ...htmlWebpackPluginConfig,
-    }),
-
+    })),
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "src/public/"),
-          to: path.resolve(__dirname, "dist/"),
+          from: path.resolve(__dirname, 'src/public/'),
+          to: path.resolve(__dirname, 'dist/'),
         },
       ],
     }),

@@ -1,5 +1,5 @@
-@use '../../abstracts/variables' as var;
-@use 'sass:map';
+@use "../../abstracts/variables" as var;
+@use "sass:map";
 
 main .hero {
   padding-block: 14rem;
@@ -34,7 +34,7 @@ main .hero {
 }
 
 /* MD: minimum viewport width 768px or above */
-@media screen and (min-width: map.get(var.$breakpoints, 'md')) {
+@media screen and (min-width: map.get(var.$breakpoints, "md")) {
   main .hero {
     flex-direction: row;
 
@@ -54,7 +54,7 @@ main .hero {
 }
 
 /* LG: minimum viewport width 992px or above */
-@media screen and (min-width: map.get(var.$breakpoints, 'lg')) {
+@media screen and (min-width: map.get(var.$breakpoints, "lg")) {
   main .hero .user-intro .name {
     font-size: 3rem;
   }
