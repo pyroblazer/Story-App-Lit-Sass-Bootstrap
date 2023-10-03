@@ -28,16 +28,8 @@ const Register = {
       console.log(formData);
 
       try {
-        const response = await Auth.register({
-          email: formData.email,
-          password: formData.password,
-        });
-
-        const updateProfileResponse = await Auth.updateProfile(response.user, {
-          displayName: formData.username,
-        });
-        console.log(updateProfileResponse);
         window.alert('Registered a new user');
+        window.location.href = '/auth/login.html';
       } catch (error) {
         console.error(error);
       }

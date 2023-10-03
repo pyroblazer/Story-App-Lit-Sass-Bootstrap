@@ -10,7 +10,7 @@ import './home/Top';
 
 import './add/Main';
 
-import './CardStory';
+import './Spinner';
 
 import './FooterApp';
 
