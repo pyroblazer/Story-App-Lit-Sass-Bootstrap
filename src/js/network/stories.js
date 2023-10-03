@@ -1,71 +1,107 @@
-import { v4 as uuidv4 } from 'uuid';
-import {
-  addDoc,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-} from 'firebase/firestore';
-import {
-  ref,
-  uploadBytes,
-  getDownloadURL,
-} from 'firebase/storage';
-import axios from 'axios';
-import { auth, db, storage } from '../utils/firebase';
+/* eslint-disable no-unused-expressions */
+// import axios from 'axios';
+import Cookies from 'js-cookie';
+import axiosInstance from '../utils/http';
 import ApiEndpoint from '../config/api-endpoint';
+import CheckUserAuth from '../pages/auth/check-user-auth';
+import Utils from '../utils/utils';
 
 const Stories = {
   async getAll() {
     let responseRecords = {};
     try {
-      // Make the GET request using Axios
-      const response = await axios.get(ApiEndpoint.GET_ALL_STORY);
+      Utils.showSpinner();
 
-      console.log(response);
+      const userSignedIn = CheckUserAuth.isUserSignedIn();
 
-      // Access the data from the response
+      if (!userSignedIn) return responseRecords;
+
+      const authToken = Cookies.get('token');
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      };
+
+      const response = await axiosInstance.get(ApiEndpoint.GET_ALL_STORY, config);
+
       responseRecords = response.data;
     } catch (error) {
-      // Handle any errors that occurred during the request
       console.error('Error:', error);
+      Utils.showModalWithMessage(error);
+    } finally {
+      Utils.hideSpinner();
     }
     return responseRecords;
   },
 
   async getById(id) {
-    const storyRef = doc(db, 'stories', id);
-    const docSnapshot = await getDoc(storyRef);
+    let responseRecord = {};
+    try {
+      Utils.showSpinner();
 
-    return docSnapshot.data();
+      const userSignedIn = CheckUserAuth.isUserSignedIn();
+
+      if (!userSignedIn) return responseRecord;
+
+      const authToken = Cookies.get('token');
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      };
+
+      const response = await axiosInstance.get(ApiEndpoint.GET_BY_ID_STORY(id), config);
+
+      responseRecord = response.data;
+    } catch (error) {
+      console.error('Error:', error);
+      Utils.showModalWithMessage(error);
+    } finally {
+      Utils.hideSpinner();
+    }
+
+    return responseRecord;
   },
 
-  async store({ description, photoUrl }) {
-    const storiesRef = collection(db, 'stories');
-    const data = { description, photoUrl };
+  async store({
+    description, photo, lat = null, lon = null,
+  }) {
+    let response; // Declare response outside the try-catch block
+    try {
+      const userSignedIn = CheckUserAuth.isUserSignedIn();
 
-    return addDoc(storiesRef, {
-      ...data,
-      id: uuidv4(),
-      name: auth.currentUser.displayName,
-      createdAt: new Date().toISOString(),
-    });
-  },
+      const headers = {
+        'Content-Type': 'multipart/form-data',
+      };
 
-  async storePhoto(file) {
-    const storageRef = ref(
-      storage,
-      `stories/${auth.currentUser.uid}/${file.name}`,
-    );
+      if (userSignedIn) {
+        const authToken = Cookies.get('token');
+        headers.Authorization = `Bearer ${authToken}`;
+      }
 
-    return uploadBytes(storageRef, file);
-  },
+      const config = {
+        headers,
+      };
 
-  async getPhotoURL(fileFullPath) {
-    const storageRef = ref(storage, fileFullPath);
+      const formData = new FormData();
 
-    return getDownloadURL(storageRef);
+      formData.append('photo', photo);
+      formData.append('description', description);
+      if (lat !== null) formData.append('lat', lat); // Use !== null instead of a ternary operator
+      if (lon !== null) formData.append('lon', lon); // Use !== null instead of a ternary operator
+
+      const url = userSignedIn ? ApiEndpoint.STORE_STORY : ApiEndpoint.STORE_STORY_GUEST;
+      response = await axiosInstance.post(url, formData, config);
+    } catch (error) {
+      console.error(error);
+      Utils.showModalWithMessage(error);
+    } finally {
+      Utils.hideSpinner();
+    }
+    return response.data; // Return response outside the try-catch block
   },
 };
 

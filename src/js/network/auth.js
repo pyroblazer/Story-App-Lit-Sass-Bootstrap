@@ -1,42 +1,63 @@
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  updateProfile,
-} from 'firebase/auth';
-import axios from 'axios';
-import { auth } from '../utils/firebase';
+import Cookies from 'js-cookie';
+import axiosInstance from '../utils/http';
 import ApiEndpoint from '../config/api-endpoint';
+import CheckUserAuth from '../pages/auth/check-user-auth';
+import Utils from '../utils/utils';
 
 const Auth = {
   async register({ name, email, password }) {
     try {
-      // Make the POST request using Axios
-      const response = await axios.post(ApiEndpoint.REGISTER, {
+      Utils.showSpinner();
+      const response = await axiosInstance.post(ApiEndpoint.REGISTER, {
         name,
         email,
         password,
+      }).catch((error) => {
+        Utils.showModalWithMessage(error.response.data.message);
       });
-
-      return response.data;
+      return response?.data;
     } catch (error) {
       console.error('Error:', error);
+      Utils.showModalWithMessage(error.response.data.message);
       throw error;
+    } finally {
+      Utils.hideSpinner();
     }
   },
 
   async login({ email, password }) {
-    return signInWithEmailAndPassword(auth, email, password);
+    try {
+      Utils.showSpinner();
+      const response = await axiosInstance.post(ApiEndpoint.LOGIN, {
+        email,
+        password,
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error:', error);
+      alert(error);
+      Utils.showModalWithMessage(error.response.data.message);
+      throw error;
+    } finally {
+      Utils.hideSpinner();
+    }
   },
 
   async logout() {
-    return signOut(auth);
+    try {
+      Cookies.remove('token');
+      Cookies.remove('username');
+    } catch (error) {
+      console.error('Error:', error);
+      Utils.showModalWithMessage(error);
+      throw error;
+    } finally {
+      Utils.hideSpinner();
+    }
   },
 
-  async updateProfile(user, { displayName = null } = {}) {
-    return updateProfile(user, {
-      displayName,
-    });
+  async updateProfile() {
+    CheckUserAuth.checkLoginState();
   },
 };
 

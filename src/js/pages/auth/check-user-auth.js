@@ -1,35 +1,26 @@
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../utils/firebase';
+import Cookies from 'js-cookie';
 
 const CheckUserAuth = {
   excludeRedirectPage: ['login.html', 'register.html'],
 
-  checkLoginState(finallyCallback = null) {
-    if (typeof finallyCallback !== 'object') {
-      if (typeof finallyCallback !== 'function') {
-        throw new Error(
-          'Parameter finallyCallback should be an callback function',
-        );
-      }
-    }
+  isUserSignedIn() {
+    return Cookies.get('token');
+  },
 
+  checkLoginState() {
     const isUserOnAuthPage = this._isUserOnAuthPage(this.excludeRedirectPage);
 
-    onAuthStateChanged(auth, (user) => {
-      const isUserSignedIn = Boolean(user);
+    const isUserSignedIn = this.isUserSignedIn();
 
-      if (isUserSignedIn) {
-        if (isUserOnAuthPage) {
-          window.location.replace('/');
-        } else {
-          this._showLoginMenuOrUserLogMenu(isUserSignedIn);
-        }
-      } else if (!isUserOnAuthPage) {
-        window.location.replace('/auth/login.html');
+    if (isUserSignedIn) {
+      if (isUserOnAuthPage) {
+        window.location.replace('/');
+      } else {
+        this._showLoginMenuOrUserLogMenu(isUserSignedIn);
       }
-
-      finallyCallback();
-    });
+    } else if (!isUserOnAuthPage) {
+      window.location.replace('/auth/login.html');
+    }
   },
 
   _showLoginMenuOrUserLogMenu(userLoginState) {

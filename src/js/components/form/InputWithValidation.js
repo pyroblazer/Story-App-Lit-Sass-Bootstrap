@@ -30,20 +30,34 @@ class InputWithValidation extends LitWithoutShadowDom {
   }
 
   render() {
-    return html`
-      <input
-        id=${this.inputId || nothing}
-        class="form-control"
-        type=${this.type}
-        value=${this.value || nothing}
-        ?required=${this.required}
-        @input=${(e) => (this.value = e.target.value)}
-      />
+    const passwordElement = this.type === 'password'
+      ? html`
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary border-gray" type="button" id="showPasswordButton">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+          `
+      : nothing;
 
+    return html`
+      <div class="input-group">
+        <input
+          id=${this.inputId || nothing}
+          class="form-control"
+          type=${this.type}
+          .value=${this.value || ''}
+          ?required=${this.required}
+          minlength=${this.type === 'password' ? 8 : 1}
+          @input=${this._handleInput}
+        />
+        ${passwordElement}
+      </div>
       ${this._validFeedbackTemplate()}
       <div class="invalid-feedback">${this.invalidFeedbackMessage}</div>
     `;
   }
+
 
   _validFeedbackTemplate() {
     if (this.validFeedbackMessage) {

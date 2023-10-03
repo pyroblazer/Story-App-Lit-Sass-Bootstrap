@@ -11,6 +11,7 @@ import './home/Top';
 import './add/Main';
 
 import './Spinner';
+import './Modal';
 
 import './FooterApp';
 
