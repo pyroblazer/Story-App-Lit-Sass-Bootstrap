@@ -11,10 +11,6 @@ import About from './pages/about';
 import Login from './pages/auth/login';
 import Register from './pages/auth/register';
 
-import './utils/firebase';
-// import * as bootstrap from 'bootstrap';
-import CheckUserAuth from './pages/auth/check-user-auth';
-
 const routes = {
   '/': Home,
   '/stories/add.html': Add,
@@ -40,8 +36,7 @@ const initPages = () => {
 window.addEventListener('DOMContentLoaded', async () => {
   initPages();
 
-  CheckUserAuth.checkLoginState(async () => {
-    const route = detectRoute();
-    await route.init();
-  });
+  const route = detectRoute();
+
+  await route.init();
 });

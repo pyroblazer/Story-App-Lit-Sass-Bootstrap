@@ -1,4 +1,5 @@
 import Auth from '../../network/auth';
+import Utils from '../../utils/utils';
 
 const Register = {
   async init() {
@@ -24,38 +25,57 @@ const Register = {
     const formData = this._getFormData();
 
     if (this._validateFormData({ ...formData })) {
-      console.log('formData');
-      console.log(formData);
-
       try {
-        window.alert('Registered a new user');
-        window.location.href = '/auth/login.html';
+        Auth.register(formData);
+        Utils.showModalWithMessage('Registered a new user');
+
+        setTimeout(() => {
+          window.location.href = '/auth/login.html';
+        }, 500);
       } catch (error) {
         console.error(error);
+        Utils.showModalWithMessage(error);
       }
     }
   },
 
   _getFormData() {
     const name = document.querySelector('#validationCustomRecordName');
-    const username = document.querySelector('#validationCustomUsername');
     const email = document.querySelector('#validationCustomEmail');
     const password = document.querySelector('#validationCustomPassword');
 
     return {
       name: name.value,
-      username: username.value,
       email: email.value,
       password: password.value,
     };
   },
 
   _validateFormData(formData) {
-    const formDataFiltered = Object.values(formData).filter(
-      (item) => item === '',
-    );
+    const { name, email, password } = formData;
 
-    return formDataFiltered.length === 0;
+    const errors = [];
+
+    if (name.length < 1) {
+      errors.push('Please enter a username.');
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      errors.push('Invalid email address.');
+    }
+
+    if (password.length < 8) {
+      errors.push('Password must be at least 8 characters.');
+    }
+
+    if (errors.length > 0) {
+      const errorString = errors.join('\n');
+      Utils.showModalWithMessage(errorString);
+      return false;
+    }
+
+    return true;
   },
 };
 

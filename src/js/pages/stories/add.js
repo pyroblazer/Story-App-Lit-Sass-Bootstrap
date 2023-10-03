@@ -1,4 +1,6 @@
+import geolib from 'geolib';
 import Stories from '../../network/stories';
+import Utils from '../../utils/utils';
 
 const Add = {
   async init() {
@@ -25,23 +27,25 @@ const Add = {
 
   async _sendPost() {
     const formData = this._getFormData();
-    console.log('formDataInitSendPost');
-    console.log(formData);
 
     try {
-      const storageResponse = await Stories.storePhoto(formData.photoUrl);
-      const srcPhoto = await Stories.getPhotoURL(storageResponse.metadata.fullPath);
+      const position = await this.getCurrentLocation();
 
-      const response = await Stories.store({
+      await Stories.store({
         ...formData,
-        photoUrl: srcPhoto,
+        photo: formData.photo,
+        lat: position.coords.latitude,
+        lon: position.coords.longitude,
       });
-      console.log(response);
-      window.alert('New story added successfully');
 
-      this._goToHomePage();
+      Utils.showModalWithMessage('New story added successfully');
+
+      setTimeout(() => {
+        this._goToHomePage();
+      }, 500);
     } catch (error) {
       console.error(error);
+      Utils.showModalWithMessage(error);
     }
   },
 
@@ -53,16 +57,28 @@ const Add = {
 
     return {
       description: descriptionInput.value,
-      photoUrl: photoInput.files[0],
+      photo: photoInput.files[0],
     };
   },
 
   _validateFormData(formData) {
-    const formDataFiltered = Object.values(formData).filter(
-      (item) => item === '',
-    );
+    const errors = [];
 
-    return formDataFiltered.length === 0;
+    if (!formData.description) {
+      errors.push('Description is required.');
+    }
+
+    if (!formData.photo) {
+      errors.push('Photo is required.');
+    }
+
+    if (errors.length > 0) {
+      const message = errors.join('\n');
+      Utils.showModalWithMessage(message);
+      return false;
+    }
+
+    return true;
   },
 
   _goToHomePage() {
