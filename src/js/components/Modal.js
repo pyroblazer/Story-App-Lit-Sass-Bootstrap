@@ -3,8 +3,9 @@ import LitWithoutShadowDom from './base/LitWithoutShadowDom';
 import Utils from '../utils/utils';
 
 class Modal extends LitWithoutShadowDom {
-  closeModal() {
-    Utils.hideModal();
+  constructor() {
+    super();
+    this.closeModal = Utils.hideModal();
   }
 
   render() {

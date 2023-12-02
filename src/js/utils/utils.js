@@ -1,7 +1,3 @@
-import Cookies from 'js-cookie';
-import { Modal } from 'bootstrap';
-
-/* eslint-disable no-undef */
 const Utils = {
   setUserToken(key, value) {
     return sessionStorage.setItem(key, value);
