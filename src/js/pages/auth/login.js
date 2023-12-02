@@ -4,7 +4,7 @@ import Utils from '../../utils/utils';
 
 const Login = {
   async init() {
-    this._showHidePassword();
+    Utils._showHidePassword();
     this._initialListener();
   },
 
@@ -42,7 +42,7 @@ const Login = {
           displayName: response.loginResult.name,
         });
       } catch (error) {
-        console.error(error);
+        console.log(error);
         Utils.showModalWithMessage(error.response.data.message);
       } finally {
         Utils.hideSpinner();
@@ -81,20 +81,6 @@ const Login = {
     }
 
     return true;
-  },
-
-  _showHidePassword() {
-    const passwordInput = document.getElementById('validationCustomPassword');
-    const showPasswordButton = document.getElementById('showPasswordButton');
-    showPasswordButton.addEventListener('click', () => {
-      if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        showPasswordButton.innerHTML = '<i class="bi bi-eye-slash"></i>';
-      } else {
-        passwordInput.type = 'password';
-        showPasswordButton.innerHTML = '<i class="bi bi-eye"></i>';
-      }
-    });
   },
 };
 

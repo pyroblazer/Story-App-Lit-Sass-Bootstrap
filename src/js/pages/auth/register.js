@@ -3,6 +3,7 @@ import Utils from '../../utils/utils';
 
 const Register = {
   async init() {
+    Utils._showHidePassword();
     this._initialListener();
   },
 

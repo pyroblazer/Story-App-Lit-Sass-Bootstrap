@@ -34,6 +34,19 @@ const Utils = {
     modal.style.display = 'none';
     this.hideSpinner();
   },
+  _showHidePassword() {
+    const passwordInput = document.getElementById('validationCustomPassword');
+    const showPasswordButton = document.getElementById('showPasswordButton');
+    showPasswordButton.addEventListener('click', () => {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        showPasswordButton.innerHTML = '<i class="bi bi-eye-slash"></i>';
+      } else {
+        passwordInput.type = 'password';
+        showPasswordButton.innerHTML = '<i class="bi bi-eye"></i>';
+      }
+    });
+  },
 };
 
 export default Utils;
