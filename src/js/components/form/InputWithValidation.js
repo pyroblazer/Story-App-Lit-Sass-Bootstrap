@@ -58,7 +58,6 @@ class InputWithValidation extends LitWithoutShadowDom {
     `;
   }
 
-
   _validFeedbackTemplate() {
     if (this.validFeedbackMessage) {
       return html`
